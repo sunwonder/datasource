@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="generator_config.properties" />
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="${mysql.classPath}" />
+    <!-- 一个数据库一个context -->
+    <context id="Mysql" targetRuntime="MyBatis3">
+
+
+        <plugin type="mybatis.plugins.BaseClientPlugin">
+            <property name="superClient" value="com.jason.otg.common.dao.IBaseDao" />
+            <property name="superService" value="com.jason.learning.datasource.service.IBaseService" />
+            <property name="superServiceImpl" value="com.jason.learning.datasource.service.impl.BaseServiceImpl" />
+            <property name="service" value="com.jason.learning.datasource.service" />
+            <property name="serviceImpl" value="com.jason.learning.datasource.service.impl" />
+            <property name="generateExample" value="false" />
+            <property name="enFuzzySearch" value="false" />
+        </plugin>
+
+
+         <!--
+              这个插件给由MBG生成的Javas添加了java.io.Serializable标记接口。这个插件给实体类增加了serialVersionUID字段。
+              重要提示：这是一个简单的实现java.io.Serializable并且不会尝试做任何版本的类。
+              这个插件接受两个属性：
+                  addGWTInterface（可选的）True/False.。如果为true，插件将给实体对象增加谷歌Web工具包（GWT）的 IsSerializable接口。默认值是false。
+                  suppressJavaInterface（必须的）True/False。如果为true，插件将不添加java.io.Serializable接口。这是对于其中对象应该是可序列化的GWT，但不是严格意义上的Java的场景。默认值是false。
+          -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+            <!-- 如果为true，插件将给实体对象增加谷歌Web工具包（GWT）的 IsSerializable接口 -->
+            <property name="addGWTInterface" value="false"/>
+        </plugin>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!-- TKmybatis配置 -->
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <!-- 指定JDBC和Java类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成实体类的包名地址 -->
+        <javaModelGenerator targetPackage="com.jason.learning.datasource.entity"
+                            targetProject="src/main/java">
+            <!-- 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；-->
+            <property name="constructorBased" value="false"/>
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置
+        <sqlMapGenerator targetPackage="com.jason.learning.datasource.mapper"
+                         targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator> -->
+        <!-- 生成DAO的包名和位置 -->
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator type="ANNOTATEDMAPPER"
+                             targetPackage="com.jason.learning.datasource.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 要生成哪些表 -->
+        <table tableName="%" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>

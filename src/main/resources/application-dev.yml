@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    initialSize: 5
+    minIdle: 5
+    maxActive: 5
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    dbone:
+      jdbcUrl: jdbc:mysql://localhost:3306/jason?useSSL=false
+      userName: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    dbtwo:
+      jdbcUrl: jdbc:mysql://localhost:3306/test?useSSL=false
+      userName: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  configuration:
+   map-underscore-to-camel-case: true #开启驼峰映射
