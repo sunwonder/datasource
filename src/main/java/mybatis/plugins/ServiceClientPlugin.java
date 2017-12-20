@@ -19,21 +19,21 @@ import java.util.List;
 public class ServiceClientPlugin extends PluginAdapter {
 
     private static Boolean isExceted = false;
-    private FullyQualifiedJavaType superClient;
     private FullyQualifiedJavaType superService;
     private FullyQualifiedJavaType superServiceImpl;
     private FullyQualifiedJavaType service;
     private FullyQualifiedJavaType serviceImpl;
     private FullyQualifiedJavaType controller;
+    private String repository;
 
     @Override
     public boolean validate(List<String> list) {
-        superClient = new FullyQualifiedJavaType(properties.getProperty("superClient"));
         superService = new FullyQualifiedJavaType(properties.getProperty("superService"));
         superServiceImpl = new FullyQualifiedJavaType(properties.getProperty("superServiceImpl"));
         service = new FullyQualifiedJavaType(properties.getProperty("service"));
         serviceImpl = new FullyQualifiedJavaType(properties.getProperty("serviceImpl"));
         controller = new FullyQualifiedJavaType(properties.getProperty("controller"));
+        repository = properties.getProperty("repository");
         List<TableConfiguration> tableConfigurations = context.getTableConfigurations();
         return true;
     }
@@ -55,12 +55,8 @@ public class ServiceClientPlugin extends PluginAdapter {
         /**
          * 添加 继承
          */
-        if (null != superClient) {
-            interfaze.addAnnotation("@RepositoryTwo");
-            interfaze.addImportedType(new FullyQualifiedJavaType("com.jason.learning.datasource.annotation.RepositoryTwo"));
-        }
-
-
+        interfaze.addAnnotation(repository);
+        interfaze.addImportedType(new FullyQualifiedJavaType("com.jason.learning.datasource.annotation."+repository.substring(1)));
         return true;
     }
 

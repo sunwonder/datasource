@@ -2,15 +2,18 @@ package com.jason.learning.datasource.mapper;
 
 import com.jason.learning.datasource.annotation.RepositoryOne;
 import com.jason.learning.datasource.entity.Admin;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.common.Mapper;
 
-/**
- * ${DESCRIPTION}
- *
- * @author jason.guan
- * @create 2017-12-14 下午11:25
- **/
 @RepositoryOne
 public interface AdminMapper extends Mapper<Admin> {
-
 }

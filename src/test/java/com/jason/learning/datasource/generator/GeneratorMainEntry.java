@@ -19,14 +19,14 @@ import java.util.List;
  * @author jason.guan
  * @create 2017-12-18 下午2:33
  **/
-public class GenMain {
+public class GeneratorMainEntry {
 
     public static void main(String[] args) {
 
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         String genCfg = "/generatorConfig.xml";
-        File configFile = new File(GenMain.class.getResource(genCfg).getFile());
+        File configFile = new File(GeneratorMainEntry.class.getResource(genCfg).getFile());
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = null;
         try {

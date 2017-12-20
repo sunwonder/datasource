@@ -27,7 +27,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("标题：OTG_接口文档")
-                        .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
+                        .description("描述：具体包括XXX,XXX模块...")
                         .contact(new Contact("Jason Guan", null, null))
                         .version("版本号:1.0")
                         .build())
