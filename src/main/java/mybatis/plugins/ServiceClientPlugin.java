@@ -110,17 +110,12 @@ public class ServiceClientPlugin extends PluginAdapter {
         TopLevelClass topContrllerLevelClass = new TopLevelClass(controllerClass);
         topContrllerLevelClass.setVisibility(JavaVisibility.PUBLIC);
         topContrllerLevelClass.addImportedType(objectFqjt);
-
         topContrllerLevelClass.addAnnotation("@Api(\"".concat(objectName + "Controller").concat("\")"));
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.Api"));
-
-
         topContrllerLevelClass.addAnnotation("@RestController");
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("org.springframework.web.bind.annotation.RestController"));
-
         topContrllerLevelClass.addAnnotation("@RequestMapping(\"/"+objectName.substring(0,1).toLowerCase()+objectName.substring(1)+"/*\")");
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("org.springframework.web.bind.annotation.RequestMapping"));
-
         String serviceShortName = serviceInterface.getShortName();
         String serviceInterfaceAlias = serviceShortName.substring(1, 2).toLowerCase() + serviceShortName.substring(2);
         Field serviceField = new Field(serviceInterfaceAlias, serviceInterface);
@@ -129,12 +124,8 @@ public class ServiceClientPlugin extends PluginAdapter {
         topContrllerLevelClass.addField(serviceField);
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("org.springframework.beans.factory.annotation.Autowired"));
         topContrllerLevelClass.addImportedType(serviceInterface);
-
-
         String paramShortName = objectFqjt.getShortName();
         String paramName = paramShortName.substring(0,1).toLowerCase().concat(paramShortName.substring(1));
-
-
         // get Method
         Method get = new Method("get"+paramShortName);
         get.setVisibility(JavaVisibility.PUBLIC);
@@ -144,7 +135,6 @@ public class ServiceClientPlugin extends PluginAdapter {
         get.addAnnotation("@RequestMapping(\"get\")");
         get.addAnnotation("@ApiOperation(value = \"get\", httpMethod = \"POST\")");
         topContrllerLevelClass.addMethod(get);
-
         // save Method
         Method save = new Method("save"+paramShortName);
         save.setVisibility(JavaVisibility.PUBLIC);
@@ -155,7 +145,6 @@ public class ServiceClientPlugin extends PluginAdapter {
         save.addAnnotation("@RequestMapping(\"save\")");
         save.addAnnotation("@ApiOperation(value = \"save\", httpMethod = \"POST\")");
         topContrllerLevelClass.addMethod(save);
-
         // delete Method
         Method delete = new Method("delete"+paramShortName);
         delete.setVisibility(JavaVisibility.PUBLIC);
@@ -165,8 +154,6 @@ public class ServiceClientPlugin extends PluginAdapter {
         delete.addAnnotation("@RequestMapping(\"delete\")");
         delete.addAnnotation("@ApiOperation(value = \"delete\", httpMethod = \"POST\")");
         topContrllerLevelClass.addMethod(delete);
-
-
         // update Method
         Method update = new Method("update"+paramShortName);
         update.setVisibility(JavaVisibility.PUBLIC);
@@ -176,8 +163,6 @@ public class ServiceClientPlugin extends PluginAdapter {
         update.addAnnotation("@RequestMapping(\"update\")");
         update.addAnnotation("@ApiOperation(value = \"update\", httpMethod = \"POST\")");
         topContrllerLevelClass.addMethod(update);
-
-
         // list Method
         Method list = new Method("list"+paramShortName);
         list.setVisibility(JavaVisibility.PUBLIC);
@@ -191,15 +176,8 @@ public class ServiceClientPlugin extends PluginAdapter {
 
         topContrllerLevelClass.addImportedType(FullyQualifiedJavaType.getNewListInstance());
         topContrllerLevelClass.addMethod(list);
-
-
-
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("org.springframework.web.bind.annotation.RequestMapping"));
         topContrllerLevelClass.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.ApiOperation"));
-
-
-
-
         javaFile = new GeneratedJavaFile(topContrllerLevelClass, context.getJavaModelGeneratorConfiguration()
                 .getTargetProject(),
                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),

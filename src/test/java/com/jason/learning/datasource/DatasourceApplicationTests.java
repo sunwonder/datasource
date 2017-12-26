@@ -1,6 +1,8 @@
 package com.jason.learning.datasource;
 
 import com.alibaba.fastjson.JSON;
+import com.jason.learning.datasource.entity.ApiInvoke;
+import com.jason.learning.datasource.mapper.ApiInvokeMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class DatasourceApplicationTests {
     public void contextLoads() {
     }
 
+    @Autowired
+    ApiInvokeMapper apiInvokeMapper;
+
 //    @SuppressWarnings("all")
 //    @Autowired
 //    AdminMapper adminMapper;
@@ -30,6 +35,12 @@ public class DatasourceApplicationTests {
 
     @Test
     public void test_db() {
+        ApiInvoke apiInvoke = new ApiInvoke();
+        apiInvoke.setAppid("test");
+        apiInvoke.setCode("3333");
+        apiInvoke.setConsumeTime(333L);
+        apiInvoke.setInterfaceName("5555");
+        apiInvokeMapper.insertSelective(apiInvoke);
         //开始进行测试
 //        List<Admin> list = adminMapper.selectAll();
 //        System.out.println(JSON.toJSONString(list));
