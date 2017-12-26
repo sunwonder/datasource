@@ -112,10 +112,10 @@
             <!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
         <!--</table>-->
 
-        <table tableName="api_invoke" domainObjectName="ApiInvoke"
+        <table tableName="api_invoke" schema="xiaoya_finance" domainObjectName="ApiInvoke"
         enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false"
-        selectByExampleQueryId="false">
+        selectByExampleQueryId="false" >
         <!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
         </table>
     </context>
